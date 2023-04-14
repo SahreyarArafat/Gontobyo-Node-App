@@ -1,0 +1,88 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Font Awesome Icon cdn link is given below. -->
+    <script src="https://kit.fontawesome.com/8b9110ef0c.js" crossorigin="anonymous"></script>
+    <!-- Google Font cdn link is given below. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <!-- Eexternal CSS link is given below. -->
+    <link rel="stylesheet" href="./Css/style.css">
+    <link rel="stylesheet" href="./Css/golpo-feature-kobita.css">
+    <link rel="shortcut icon" type="x-icon" href="./Image/gontobyo-logo-200h.png">
+    <title>Technology-Gontobyo</title>
+</head>
+
+
+<%- include("layout/header") %>
+
+    <!-- Header is finished ! -->
+    <%- include("layout/success-alert") %>
+
+        <div class="section-wrapper">
+            <section>
+                <h1>প্রযুক্তিঃ নিউরালিংক</h1>
+                <div class="content">
+                    <div class="image_container"><img src="./Image/neuralink.jpeg" alt="Feature-Image"></div>
+                </div>
+                <div class="text_container">
+                    <p id="main-golpo">
+                        <span class="first-letter">য</span>তো দিন যাচ্ছে মানুষের মৌলিক চাহিদা গুলোও পরিবর্তন হচ্ছে। পাচঁটির সাথে যোগ হচ্ছে আরো একটি চাহিদা, প্রযুক্তি। মৌলিক চাহিদাগুলো যেমন আমাদের জীবনের অপরিহার্য অংশ, তেমনি এই প্রযুক্তিকেও জীবনের অপরিহার্য
+                        অঙ্গতে পরিনত করতে রীতিমতো প্রতিযোগিতায় নেমেছে প্রযুক্তি বিশ্বের সেরা কোম্পানিগুলো। তাদের মধ্যে অন্যতম হলো ইলন মাস্কের নিউরালিংক।
+                        <br /> নিউরালিংক হলো এমন এক ডিভাইস/চিপ যেটা ব্রেইনে যুক্ত করলে বিভিন্ন জটিল সমস্যা মানুষ সমাধান করে ফেলতে পারবে কোন বাস্তবিক অভিজ্ঞতা/অর্জিত জ্ঞান ছাড়াই। ধরা যাক, জটিল কোন সার্জারির কথা। একজন চিকিৎসকের দীর্ঘদিন সার্জারি করে অভিজ্ঞতা
+                        অর্জন করতে হয় সেই জটিল সার্জারিতে সফল হতে। কিন্তু নিউরালিংক যুক্ত করার সাথে সাথে হয়তো যেকোন মানুষ নিমিষেই করে ফেলবে সেই জটিল সার্জারি।
+                        <br /> যদিও এই ডিভাইসটির প্রাথমিক উদ্দেশ্য হলো পক্ষাঘাতগ্রস্থ রুগীদের স্বাভাবিক কর্মক্ষম করে তোলা। তবে মানুষের প্রতিনয়ত উচ্চাভিলাষ আর প্রযুক্তির উৎকর্ষতা; নির্দ্বিধায় বলা যায়, নিউরালিংক হতে পারে অগমেন্টেড হিউম্যান বা অতিমানবের
+                        প্রথম ধাপ।
+                        <h4> -এহসান হক </h4>
+
+                        <br />
+                    </p>
+                </div>
+            </section>
+
+
+            <% userteches.forEach(tech=>{ %>
+
+                <div class="story-devider ">
+                    <div class="devider-line "></div>
+                    <div class="devider-star "><i class="fa-solid fa-star-of-david "></i></div>
+                    <div class="devider-line "></div>
+                </div>
+                <section>
+                    <h1>
+                        <%=tech.story_title %>
+                    </h1>
+                    <div class="content">
+                        <div class="image_container"><img src="<%= tech.storyimage %>" alt="Feature-Image"></div>
+                    </div>
+                    <div class="text_container">
+                        <p id="main-golpo">
+                            <%= tech.story%>
+                                <h4>-
+                                    <%= tech.writter_name %>
+                                </h4>
+                                <h5 style="margin: 3px 0px 0px 12px; color: gray; ">
+                                    <%= tech.post_time %>
+                                </h5>
+                        </p>
+                    </div>
+                </section>
+                <% }) %>
+        </div>
+
+        <!-- Content Section is finished !  -->
+
+        <%- include("layout/footer") %>
+
+            <!-- Footer Section is finished ! -->
+
+            <script src="./Js/main.js"></script>
+
+
+            </body>
+
+</html>

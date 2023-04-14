@@ -1,0 +1,156 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    font-family: 'Inter', sans-serif;
+}
+
+.approval-error-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.robotImage-and-text-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.robot-image-container img {
+    height: 350px;
+}
+
+.robot-text-container {
+    flex-direction: column;
+    align-items: center;
+}
+
+.robot-text-container i {
+    margin-bottom: 10px;
+    font-size: 40px;
+    color: rgb(36, 206, 36)
+}
+
+.approval-error {
+    padding: 0px 10px;
+    text-align: center;
+}
+
+.previous-page-link {
+    margin-top: 100px;
+}
+
+.previous-page-link i {
+    animation: runningLeftArrow 0.8s infinite ease-out;
+}
+
+@keyframes runningLeftArrow {
+    0% {
+        transform: translateX(-10px);
+    }
+    50% {
+        transform: translateX(2px);
+    }
+    100% {
+        transform: translateX(-10px);
+    }
+}
+
+.Approve-Delete-container {
+    height: 90px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.approve-btn {
+    width: 76px;
+    padding: 8px 12px;
+    color: white;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    background-color: #60ca09;
+    transform: scale(1);
+    transition: transform 0.2s ease-in-out;
+}
+
+.delete-btn {
+    width: 76px;
+    padding: 8px 12px;
+    color: white;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    background-color: red;
+    transform: scale(1);
+    transition: transform 0.2s ease-in-out;
+}
+
+.delete-btn:hover,
+.approve-btn:hover {
+    transform: scale(1.05);
+}
+
+.delete-btn:active,
+.approve-btn:active {
+    transform: scale(0.9);
+}
+
+
+/* -------Media Query------ */
+
+
+/* 1  Extra large devices (large laptops and desktops, 1200px and up) */
+
+@media (min-width:1200px) and (max-width:1499px) {}
+
+
+/* 2  Large devices (laptops/desktops, 992px and up) */
+
+@media (min-width:992px) and (max-width:1199px) {}
+
+
+/* 3  Medium devices (landscape tablets, 768px and up) */
+
+@media (max-width:650px) {
+    .robot-image-container img {
+        height: 250px;
+    }
+    .robot-text-container {
+        align-items: center;
+    }
+    .robot-text-container i {
+        font-size: 40px;
+        color: rgb(36, 206, 36)
+    }
+}
+
+
+/* 4  Small devices (portrait tablets and large phones, 500px and up) */
+
+@media (max-width:530px) {
+    .robot-image-container img {
+        height: 250px;
+    }
+}
+
+
+/* 5  Extra small devices (phones, 361px and up) */
+
+@media (max-width:490px) {
+    .robotImage-and-text-container {
+        flex-direction: column-reverse;
+    }
+    .robot-text-container {
+        margin-bottom: 50px;
+    }
+}
+
+
+/* 6  Extra extra small devices (phones, 360px and down) */
+
+@media (max-width:360px) {}

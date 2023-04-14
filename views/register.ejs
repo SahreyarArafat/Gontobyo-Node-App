@@ -1,0 +1,168 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Font Awesome Icon cdn link is given below. -->
+    <script src="https://kit.fontawesome.com/8b9110ef0c.js" crossorigin="anonymous"></script>
+    <!-- Google Font cdn link is given below. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet" />
+    <!-- Eexternal CSS link is given below. -->
+    <link rel="stylesheet" href="./Css/style.css" />
+    <link rel="shortcut icon" type="x-icon" href="./Image/gontobyo-logo-200h.png" />
+    <title>Register-Gontobyo</title>
+</head>
+
+<%- include("layout/header") %>
+
+    <!-- Header is finished ! -->
+    <div class="form-main-container">
+        <div class="main-w3layouts wrapper wrapper-register">
+            <div class="common-input-page-heading">
+                <h1>আপনার <span class="gontobyo">গন্তব্য</span> একাউন্ট <br> তৈরী করুন</h1>
+            </div>
+            <div class="main-agileinfo">
+                <div class="agileits-top">
+                    <form action="/register" method="post" id="register-form">
+                        <input class="text-inputs <%= error.username ? 'invalid-text-input' : '' %>" type="text" name="username" value="<%= value.username ? value.username : '' %>" placeholder="Username" />
+
+                        <div class="error-box valid-input <%= error.username ? 'invalid-input' : '' %>">
+                            <i class="fa-solid fa-circle-exclamation error-i"></i>
+                            <p class="error-p">
+                                <%= error.username && error.username %>
+                            </p>
+                        </div>
+
+                        <input class="text-inputs <%= error.email ? 'invalid-text-input' : '' %>" type="email" name="email" value="<%= value.email ? value.email : '' %>" placeholder="Email Address" />
+
+                        <div class="error-box valid-input <%= error.email ? 'invalid-input' : '' %>">
+                            <i class="fa-solid fa-circle-exclamation error-i"></i>
+                            <p class="error-p">
+                                <%= error.email && error.email %>
+                            </p>
+                        </div>
+
+                        <input class="text-inputs <%= error.phone ? 'invalid-text-input' : '' %>" type="tel" name="phone" value="<%= value.phone ? value.phone : '' %>" placeholder="Phone Number" />
+
+                        <div class="error-box valid-input <%= error.phone ? 'invalid-input' : '' %>">
+                            <i class="fa-solid fa-circle-exclamation error-i"></i>
+                            <p class="error-p">
+                                <%= error.phone && error.phone %>
+                            </p>
+                        </div>
+
+                        <input class="text-inputs <%= error.password ? 'invalid-text-input' : '' %>" type="password" name="password" value="<%= value.password ? value.password : '' %>" placeholder="Password" />
+
+                        <div class="error-box valid-input <%= error.password ? 'invalid-input' : '' %>">
+                            <i class="fa-solid fa-circle-exclamation error-i"></i>
+                            <p class="error-p">
+                                <%= error.password && error.password %>
+                            </p>
+                        </div>
+
+                        <div class="wthree-text">
+                            <label class="anim">
+                                <input
+                                    type="checkbox"
+                                    name="agreement"
+                                    id="agreement"
+                                    class="checkbox <%= error.agreement ? 'checkbox-error' : '' %>"
+                                    =""
+                                    onclick="ragisterCheckBoxFunction()"
+                                    value="agreed"
+                                />
+                            </label>
+                            <span class="checkbox-definition <%= error.agreement ? 'checkbox-definition-error' : '' %>">
+                                Terms & Conditions of Gontobyo</span
+                            >
+                            <div class="clear"></div>
+                        </div>
+
+                        <input type="submit" value="SIGN UP" />
+                    </form>
+                    <p class="link-offer">
+                        আপনার কি কোন একাউন্ট আছে? <br />এখনই
+                        <a
+                            href="/login"
+                            class="login-and-register-link"
+                        >
+                            লগইন </a> করুন!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <ul class="colorlib-bubbles bubbles-register">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+
+        <!-- Ragister Section is finished ! -->
+
+        <footer>
+            <h4>Follow Us</h4>
+            <div class="social-icons-container">
+                <a href="#">
+                    <div class="twitter icon">
+                        <i class="fa-brands fa-twitter"></i>
+                    </div>
+                </a>
+                <a href="#">
+                    <div class="instagram icon">
+                        <i class="fa-brands fa-instagram"></i>
+                    </div>
+                </a>
+                <a href="#">
+                    <div class="facebook icon">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </div>
+                </a>
+            </div>
+            <p>© 2022 <span>Gontobyo</span>, All Rights Reserved.</p>
+                            <p>
+                                Made by the <span class="heart">&#x2665;</span> of
+                                <a href="sahreyararafat.tk">SahreyarArafat</a>
+                            </p>
+                            </footer>
+
+                            <!-- Footer Section is finished ! -->
+                            <script>
+                                const agreement = document.getElementById(`agreement`);
+                                const checkboxDefinition =
+                                    document.querySelector(`.checkbox-definition`);
+
+
+                                function ragisterCheckBoxFunction() {
+                                    if (agreement.checked === true) {
+                                        checkboxDefinition.innerHTML =
+                                            '  I agreed to The Terms & Conditions of Gontobyo';
+                                        checkboxDefinition.classList.remove(
+                                            'checkbox-definition-error'
+                                        );
+                                        console.log(`checked!`);
+                                    } else if (agreement.checked === false) {
+                                        console.log(`unchecked!`);
+                                        checkboxDefinition.innerHTML = `You must be agreed to The Terms & Conditions of Gontobyo!`;
+                                        checkboxDefinition.classList.add(
+                                            'checkbox-definition-error'
+                                        );
+                                    }
+                                }
+                            </script>
+
+                            <script src="./Js/main.js"></script>
+                            </body>
+
+</html>

@@ -1,0 +1,80 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Font Awesome Icon cdn link is given below. -->
+    <script src="https://kit.fontawesome.com/8b9110ef0c.js" crossorigin="anonymous"></script>
+    <!-- Google Font cdn link is given below. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet" />
+    <!-- Eexternal CSS link is given below. -->
+    <link rel="stylesheet" href="./Css/style.css" />
+    <link rel="stylesheet" href="./Css/golpo-feature-kobita.css" />
+    <link rel="stylesheet" href="./Css/approval-page.css">
+    <link rel="shortcut icon" type="x-icon" href="./Image/gontobyo-logo-200h.png" />
+    <title>Approval-Error-Gontobyo</title>
+</head>
+
+<%- include("layout/header") %>
+    <!-- Header is finished !  -->
+
+    <div class="approval-error-container">
+        <div class="robotImage-and-text-container">
+            <div class="robot-image-container">
+                <img src="Image/robot-svgrepo-com.svg" alt="" />
+            </div>
+            <% if(!error.story){ %>
+                <div class="error-box invalid-input robot-text-container">
+                    <i class="fa-solid fa-circle-check" style="font-size: 40px; color: rgb(36, 206, 36)"></i>
+                    <p class="error-p">No error here!</p>
+                </div>
+                <%}else{%>
+                    <div class="error-box invalid-input robot-text-container">
+                        <i class="fa-solid fa-triangle-exclamation" style="font-size: 40px; color: red"></i>
+                        <p class="error-p approval-error">
+                            <%= error.story && error.story %>
+                        </p>
+                    </div>
+                    <%}%>
+        </div>
+        <a href="/approval-page" class="previous-page-link"><i class="fa-solid fa-angles-left"></i> Go back</a>
+    </div>
+
+
+    <!-- Content Section is finished !  -->
+
+    <footer>
+        <h4>Follow Us</h4>
+        <div class="social-icons-container">
+            <a href="#">
+                <div class="twitter icon">
+                    <i class="fa-brands fa-twitter"></i>
+                </div>
+            </a>
+            <a href="#">
+                <div class="instagram icon">
+                    <i class="fa-brands fa-instagram"></i>
+                </div>
+            </a>
+            <a href="#">
+                <div class="facebook icon">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </div>
+            </a>
+        </div>
+        <p>© 2022 <span>Gontobyo</span>, All Rights Reserved.</p>
+        <p>
+            Made by the <span class="heart">&#x2665;</span> of
+            <a href="sahreyararafat.tk">SahreyarArafat</a>
+        </p>
+    </footer>
+
+    <!-- Footer Section is finished ! -->
+
+    <script src="./Js/main.js"></script>
+    </body>
+
+</html>

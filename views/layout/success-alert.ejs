@@ -1,0 +1,21 @@
+<% if(messages != ''){ %>
+    <div class="alert-container ">
+        <div class="success-alert">
+            <div class="alert-message">
+                <%= messages %>
+            </div>
+            <div class="alert-close-icon">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const alertCloseBtn = document.querySelector('.alert-close-icon');
+        const alertContainer = document.querySelector('.alert-container');
+
+        alertCloseBtn.addEventListener('click', () => {
+            alertContainer.style.display = "none";
+        })
+    </script>
+    <%}%>

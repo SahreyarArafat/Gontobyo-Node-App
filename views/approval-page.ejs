@@ -1,0 +1,119 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Font Awesome Icon cdn link is given below. -->
+    <script src="https://kit.fontawesome.com/8b9110ef0c.js" crossorigin="anonymous"></script>
+    <!-- Google Font cdn link is given below. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <!-- Eexternal CSS link is given below. -->
+    <link rel="stylesheet" href="./Css/style.css">
+    <link rel="stylesheet" href="./Css/golpo-feature-kobita.css">
+    <link rel="stylesheet" href="./Css/approval-page.css">
+    <link rel="shortcut icon" type="x-icon" href="./Image/gontobyo-logo-200h.png">
+    <title>Admin-Approval-Gontobyo</title>
+</head>
+
+
+<%- include("layout/header") %>
+
+    <!-- Header is finished ! -->
+
+    <%- include("layout/success-alert") %>
+
+        <% if(userstories ==""){%>
+            <div class="approval-error-container">
+                <div class="robotImage-and-text-container">
+                    <div class="robot-image-container">
+                        <img src="Image/robot-svgrepo-com.svg" alt="" />
+                    </div>
+                    <div class="error-box invalid-input robot-text-container">
+                        <i class="fa-solid fa-circle-check"></i>
+                        <h2 class="error-p">There are no posts to approve.</h2>
+                    </div>
+                </div>
+            </div>
+            <%}else{%>
+                <% userstories.forEach(story=>{ %>
+                    <% if(story.storyimage){ %>
+                        <% var storyImage = story.storyimage %>
+                            <% storyImage = storyImage.replace('public','') %>
+                                <%}else{%>
+                                    <% storyImage = 'https://source.unsplash.com/random/500%C3%97500/?natural-place' %>
+                                        <%}%>
+
+                                            <section>
+                                                <h5 style="margin: 50px 0px 0px; color: gray;">
+                                                    <span style="color: black; font-weight: bold;">Category:</span>
+                                                    <%= story.writing_type %>
+                                                </h5>
+                                                <h1 style="margin: 30px 0px 50px;">
+                                                    <%= story.story_title %>
+                                                </h1>
+                                                <div class="content ">
+                                                    <div class="image_container"><img src="<%=storyImage %>" alt="Story-Image"></div>
+                                                    <div class="text_container">
+                                                        <p id="main-golpo">
+                                                            <%= story.story %>
+                                                                <h4>-
+                                                                    <%= story.writter_name %>
+                                                                </h4>
+                                                                <h5 style="margin: 3px 0px 0px 12px; color: gray; ">
+                                                                    <span style="color: black; font-weight: bold;"> Posted by:</span>
+                                                                    <%= story.posted_by %>
+                                                                </h5>
+                                                                <h5 style="margin: 3px 0px 0px 12px; color: gray; ">
+                                                                    <span style="color: black; font-weight: bold;">  Posted at:</span>
+                                                                    <%= story.Posted_at %>
+                                                                </h5>
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="Approve-Delete-container">
+                                                    <form class="golpo-form" action="/user<%=story.writing_type%>" method="post" enctype="multipart/form-data">
+
+                                                        <input class="d-none" type="text" name="writter_name" value="<%= story.writter_name %>" />
+
+                                                        <input class="d-none" type="text" name="story_title" value="<%= story.story_title %>" />
+
+                                                        <input class="d-none" type="text" name="storyimage" value="<%= storyImage %>" />
+
+                                                        <input class="d-none" type="text" name="post_time" value="<%= story.Posted_at %>" />
+
+                                                        <input class="d-none" type="text" name="story" value="<%= story.story %>" />
+
+                                                        <button id="approve-btn" class="approve-btn" type="submit">Approve</button>
+
+                                                    </form>
+
+
+                                                    <form action="/delete-golpo" method="post">
+
+                                                        <input class="d-none" name="golpo_id" value="<%= story._id %>" />
+
+                                                        <button class="delete-btn" type="submit">Delete</button>
+
+                                                    </form>
+
+                                                </div>
+
+                                            </section>
+                                            <% }) %>
+
+                                                <%}%>
+
+                                                    <!-- Content Section is finished !  -->
+
+                                                    <%- include("layout/footer") %>
+
+                                                        <script src="./Js/main.js"></script>
+
+
+                                                        </body>
+
+</html>

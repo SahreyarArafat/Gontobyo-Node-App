@@ -1,0 +1,83 @@
+<body class="preloader-overflow">
+    <div class="preloader">
+        <div class="preloader-content-container">
+            <h1><span class="gontobyo">গন্তব্য</span> বহু দূর !</h1>
+            <div class="preloader-image">
+                <img src="./Image/running.gif" alt="preloader-image">
+            </div>
+            <h6><span class="l">L</span><span class="o">O</span><span class="a">A</span><span class="d">D</span><span class="i">I</span><span class="n">N</span><span class="g">G</span></h6>
+        </div>
+    </div>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="./Image/gontobyo-logo-200h.png" alt="logo" />
+            </div>
+            <input type="checkbox" onclick="checkBoxFunction()" id="check" />
+            <label for="check">
+            <div class="small_device_menu_btn_container">
+                <div class="menu_btn_burgerUpperPart"></div>
+                <div class="menu_btn_burger" id="menu_burger_btn"></div>
+                <div class="menu_btn_burgerLowerPart"></div>
+            </div>
+            <div class="ul_cancel_wrapper"></div>
+        </label>
+            <ul>
+                <li>
+                    <a href="/" class="nav-btn home-btn"> হোম </a>
+                </li>
+                <li>
+                    <a href="/golpo" class="nav-btn"> গল্প </a>
+                </li>
+                <li>
+                    <a href="/kobita" class="nav-btn"> কবিতা </a>
+                </li>
+                <li>
+                    <a href="/technology" class="nav-btn"> প্রযুক্তি </a>
+                </li>
+                <!-- <li>
+                <a href="/comics" class=" nav-btn "> কমিকস </a>
+            </li> -->
+                <li>
+                    <a href="/userstory" class="nav-btn"> আপনার গল্প </a>
+                </li>
+                <% if(AdminIsLoggedIn){ %>
+                    <li>
+                        <a href="/approval-page" class="nav-btn">অনুমোদন পৃষ্ঠা </a>
+                    </li>
+                    <li>
+                        <a href="/gontobyo-users" class="nav-btn"><span class="gontobyo">গন্তব্য</span> ব্যবহারকারীগণ </a>
+                    </li>
+                    <% } %>
+                        <% if(isLoggedIn){ %>
+                            <li class="small-screen-login-out">
+                                <a href="/logout" class="logout nav-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+                </a>
+                            </li>
+                            <% }else{ %>
+                                <li class="small-screen-login-out">
+                                    <a href="/register" class="register nav-btn"><i class="fa-solid fa-user-plus"></i> Register
+                </a>
+                                    <span class="devider"> / </span>
+                                    <a href="/login" class="login nav-btn"><i class="fa-solid fa-arrow-right-to-bracket"></i> Login
+                </a>
+                                </li>
+                                <% } %>
+            </ul>
+
+            <% if(isLoggedIn){ %>
+                <li class="big-screen-login-out">
+                    <a href="/logout" class="logout nav-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+            </a>
+                </li>
+                <% }else{ %>
+                    <li class="big-screen-login-out">
+                        <a href="/register" class="register nav-btn"><i class="fa-solid fa-user-plus"></i> Register
+            </a>
+                        <span class="devider"> / </span>
+                        <a href="/login" class="login nav-btn"><i class="fa-solid fa-arrow-right-to-bracket"></i> Login
+            </a>
+                    </li>
+                    <% } %>
+        </nav>
+    </header>

@@ -1,0 +1,105 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Font Awesome Icon cdn link is given below. -->
+    <script src="https://kit.fontawesome.com/8b9110ef0c.js" crossorigin="anonymous"></script>
+    <!-- Google Font cdn link is given below. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet" />
+    <!-- Eexternal CSS link is given below. -->
+    <link rel="stylesheet" href="./Css/style.css" />
+    <link rel="shortcut icon" type="x-icon" href="./Image/gontobyo-logo-200h.png" />
+    <title>Login-Gontobyo</title>
+</head>
+
+<%- include("layout/header") %>
+
+    <!-- Header is finished ! -->
+    <div class="form-main-container">
+        <%- include("layout/success-alert") %>
+
+            <div class="main-w3layouts wrapper wrapper-login">
+                <div class="common-input-page-heading">
+                    <h1>লগইন করুন</h1>
+                    <p>যাতে <span class="gontobyo"> গন্তব্যে </span> আপনিও আমাদের সাথে যুক্ত হতে পারেন। </p>
+                </div>
+                <div class="main-agileinfo">
+                    <div class="agileits-top">
+                        <form action="/login" method="post" id="login-form">
+                            <input class="text-inputs <%= error.email ? 'invalid-text-input' : '' %>" type="email" name="email" value="<%= value.email ? value.email : '' %>" placeholder="Email Address" />
+                            <div class="error-box valid-input <%= error.email ? 'invalid-input' : '' %>">
+                                <i class="fa-solid fa-circle-exclamation error-i"></i>
+                                <p class="error-p">
+                                    <%= error.email && error.email %>
+                                </p>
+                            </div>
+
+                            <% if(!error.email){ %>
+                                <input class="text-inputs <%= error.password ? 'invalid-text-input' : '' %>" type="password" name="password" value="<%= value.password ? value.password : '' %>" placeholder="Password" />
+                                <div class="error-box valid-input <%= error.password ? 'invalid-input' : '' %>">
+                                    <i class="fa-solid fa-circle-exclamation error-i"></i>
+                                    <p class="error-p">
+                                        <%= error.password && error.password %>
+                                    </p>
+                                </div>
+                                <% } %>
+
+                                    <input type="submit" value="SIGN UP" />
+                        </form>
+                        <p class="link-offer">
+                            আপনার কি কোনো অ্যাকাউন্ট নেই? <br />এখনই<a href="/register" class="login-and-register-link" id="login-address"> নিবন্ধন </a> করুন!
+                        </p>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <ul class="colorlib-bubbles bubbles-register">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <!-- Ragister Section is finished ! -->
+
+    <footer>
+        <h4>Follow Us</h4>
+        <div class="social-icons-container">
+            <a href="#">
+                <div class="twitter icon">
+                    <i class="fa-brands fa-twitter"></i>
+                </div>
+            </a>
+            <a href="#">
+                <div class="instagram icon">
+                    <i class="fa-brands fa-instagram"></i>
+                </div>
+            </a>
+            <a href="#">
+                <div class="facebook icon">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </div>
+            </a>
+        </div>
+        <p>© 2022 <span>Gontobyo</span>, All Rights Reserved.</p>
+        <p>
+            Made by the <span class="heart">&#x2665;</span> of
+            <a href="sahreyararafat.tk">SahreyarArafat</a>
+        </p>
+    </footer>
+
+    <!-- Footer Section is finished ! -->
+
+    <script src="./Js/main.js"></script>
+    </body>
+
+</html>

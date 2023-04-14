@@ -1,0 +1,239 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Font Awesome Icon cdn link is given below. -->
+    <script src="https://kit.fontawesome.com/8b9110ef0c.js" crossorigin="anonymous"></script>
+    <!-- Google Font cdn link is given below. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet" />
+    <!-- Eexternal CSS link is given below. -->
+    <link rel="stylesheet" href="./Css/style.css" />
+    <link rel="stylesheet" href="./Css/golpo-feature-kobita.css" />
+    <link rel="shortcut icon" type="x-icon" href="./Image/gontobyo-logo-200h.png" />
+    <title>User-Story-Gontobyo</title>
+</head>
+
+
+<%- include("layout/header") %>
+
+    <!-- Header is finished ! -->
+    <div class="form-main-container">
+        <%- include("layout/success-alert") %>
+            <div class="main-w3layouts wrapper">
+                <div class="common-input-page-heading">
+                    <h1>আপনার গল্প</h1>
+                    <h3>এবং</h3>
+                    <p>
+                        গল্প সংক্রান্ত তথ্য দিয়ে, নিচের ইনপুটগুলো পূর্ণ করুন। অবশেষে 'POST' বাটনে ক্লিক করার মাধ্যমে আমাদের
+                        <span class="gontobyo"> গন্তব্য </span> ওয়েবে যুক্ত হোন।
+                    </p>
+                </div>
+                <div class="main-agileinfo">
+                    <div class="agileits-top">
+                        <form action="/userstory" method="post" enctype="multipart/form-data" id="golpo">
+                            <label class="text-labels-post-story" for="writing_type">লিখনির ধরন:</label
+                        >
+
+                        <select
+                            class="text-inputs-post-story"
+                            id="writing_type"
+                            name="writing_type"
+                        >
+                            
+                            <option
+                                id="op-golpo"
+                                name="writing_type"
+                                value="golpo"
+                            >
+                                গল্প
+                            </option>
+                            <option
+                                id="op-kobita"
+                                name="writing_type"
+                                value="kobita"
+                            >
+                                কবিতা
+                            </option>
+                            <option
+                                id="op-tech"
+                                name="writing_type"
+                                value="tech"
+                            >
+                                প্রযুক্তি
+                            </option>
+                        </select>
+
+                        <div class="input-label-container">
+                            <label
+                                class="text-labels-post-story"
+                                for="writter_name"
+                                >লেখকের নাম প্রদান করুন:</label
+                            >
+                            <input
+                                class="text-inputs-post-story <%= error.writter_name ? 'invalid-text-input' : '' %>"
+                                type="text"
+                                name="writter_name"
+                                value="<%= value.writter_name ? value.writter_name : '' %>"
+                            />
+                        </div>
+                        <div
+                            class="error-box valid-input <%= error.writter_name ? 'invalid-input' : '' %>"
+                        >
+                            <i
+                                class="fa-solid fa-circle-exclamation error-i"
+                            ></i>
+                            <p class="error-p">
+                                <%= error.writter_name && error.writter_name %>
+                            </p>
+                        </div>
+
+                        <div class="input-label-container">
+                            <label
+                                class="text-labels-post-story"
+                                for="story_title"
+                                >গল্পের শিরোনাম প্রদান করুন:</label
+                            >
+                            <input
+                                class="text-inputs-post-story <%= error.story_title ? 'invalid-text-input' : '' %>"
+                                type="text"
+                                name="story_title"
+                                value="<%= value.story_title ? value.story_title : '' %>"
+                            />
+                        </div>
+                        <div
+                            class="error-box valid-input <%= error.story_title ? 'invalid-input' : '' %>"
+                        >
+                            <i
+                                class="fa-solid fa-circle-exclamation error-i"
+                            ></i>
+                            <p class="error-p">
+                                <%= error.story_title && error.story_title %>
+                            </p>
+                        </div>
+
+                        <div class="input-label-container">
+                            <label
+                                class="text-labels-post-story"
+                                for="storyimage"
+                                >গল্পের সাথে সামঞ্জস্যপূর্ণ একটি ছবি প্রদান
+                                করুন:</label
+                            >
+                            <input
+                                class="text-inputs-post-story <%= error.storyimage ? 'invalid-text-input' : '' %>"
+                                type="file"
+                                name="storyimage"
+                                value="<%= value.storyimage ? value.storyimage : '' %>"
+                            />
+                        </div>
+                        <div
+                            class="error-box valid-input <%= error.storyimage ? 'invalid-input' : '' %>"
+                        >
+                            <i
+                                class="fa-solid fa-circle-exclamation error-i"
+                            ></i>
+                            <p class="error-p">
+                                <%= error.storyimage && error.storyimage %>
+                            </p>
+                        </div>
+
+                        <div class="input-label-container">
+                            <label class="text-labels-post-story" for="story"
+                                >আপনার গল্প প্রদান করুন:</label
+                            >
+                            <textarea
+                                class="textarea <%= error.story ? 'invalid-textarea' : '' %>"
+                                onkeyup="textAreaAdjust(this)"
+                                name="story"
+                                id="story"
+                                value="<%= value.story ? value.story : '' %>"
+                               
+                            ></textarea>
+                        </div>
+                        <div
+                            class="error-box valid-input <%= error.story ? 'invalid-input' : '' %>"
+                        >
+                            <i
+                                class="fa-solid fa-circle-exclamation error-i"
+                            ></i>
+                            <p class="error-p">
+                                <%= error.story && error.story %>
+                            </p>
+                        </div>
+
+                        <input
+                            class="d-none"
+                            type="text"
+                            name="posted_by"
+                            value="<%= user.email %>"
+                        />
+                        <input
+                            type="submit"
+                            value="গল্পটি পোষ্ট করুন"
+                            class="your-story-submit-btn"
+                        />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+        <!-- User Story Input form is finished ! -->
+
+        <footer>
+            <h4>Follow Us</h4>
+            <div class="social-icons-container">
+                <a href="#">
+                    <div class="twitter icon">
+                        <i class="fa-brands fa-twitter"></i>
+                    </div>
+                </a>
+                <a href="#">
+                    <div class="instagram icon">
+                        <i class="fa-brands fa-instagram"></i>
+                    </div>
+                </a>
+                <a href="#">
+                    <div class="facebook icon">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </div>
+                </a>
+            </div>
+            <p>
+                © 2022 <span class="gontobyo">Gontobyo</span>, All Rights
+                Reserved.
+            </p>
+            <p>
+                Made by the <span class="heart">&#x2665;</span> of
+                <a href="sahreyararafat.tk">SahreyarArafat</a>
+            </p>
+        </footer>
+
+        <!-- Footer Section is finished ! -->
+
+        <script>
+
+function textAreaAdjust(element) {
+  element.style.height = (2+element.scrollHeight)+"px";
+}
+
+
+            const golpoOption = document.getElementById('op-golpo');
+            const kobitaOption = document.getElementById('op-kobita');
+            const techOption = document.getElementById('op-tech');
+            const optionValue = '<%=value.writing_type%>';
+
+            if (optionValue == 'golpo') {
+                golpoOption.setAttribute('selected', 'selected');
+            } else if (optionValue == 'kobita') {
+                kobitaOption.setAttribute('selected', 'selected');
+            } else if (optionValue == 'tech') {
+                techOption.setAttribute('selected', 'selected');
+            }
+        </script>
+
+        <script src="./Js/main.js"></script>
+    </body>
+</html>

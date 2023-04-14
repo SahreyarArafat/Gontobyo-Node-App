@@ -1,0 +1,83 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Font Awesome Icon cdn link is given below. -->
+    <script src="https://kit.fontawesome.com/8b9110ef0c.js" crossorigin="anonymous"></script>
+    <!-- Google Font cdn link is given below. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <!-- Eexternal CSS link is given below. -->
+    <link rel="stylesheet" href="./Css/style.css">
+    <link rel="stylesheet" href="./Css/golpo-feature-kobita.css">
+    <link rel="stylesheet" href="./Css/users-page.css">
+    <link rel="shortcut icon" type="x-icon" href="./Image/gontobyo-logo-200h.png">
+    <title>Users-Gontobyo</title>
+</head>
+
+
+<%- include("layout/header") %>
+
+    <!-- Header is finished ! -->
+
+    <%- include("layout/success-alert") %>
+
+
+        <section>
+            <div class="users-container">
+                <% gontobyousers.forEach(user=>{ %>
+
+                    <div class="user-info">
+                        <p>
+                            Name:
+                            <span>
+                        <%= user.username %>
+                    </span>
+                        </p>
+                        <p>
+                            Email:
+                            <span>
+                        <%= user.email %>
+                    </span>
+                        </p>
+                        <p>
+                            Phone:
+                            <span>
+                        +<%= user.phone %>
+                    </span>
+                        </p>
+                        <p>
+                            <form action="/delete-user" method="post">
+
+                                <input class="d-none" name="user_id" value="<%= user._id %>" />
+
+                                <button class="delete-btn" type="submit">Delete</button>
+
+                            </form>
+                        </p>
+                    </div>
+                    <% }) %>
+            </div>
+        </section>
+
+        <!-- Content Section is finished !  -->
+
+        <%- include("layout/footer") %>
+
+            <!-- Footer Section is finished ! -->
+
+            <!-- <script>
+                const delete_btn = document.querySelector('.delete-btn');
+                const user_info = document.querySelector('.user-info');
+
+                delete_btn.addEventListener('click', () => {
+                    confirm('Do you want to delete this user?')
+                });
+            </script> -->
+            <script src="./Js/main.js"></script>
+            </body>
+
+</html>
