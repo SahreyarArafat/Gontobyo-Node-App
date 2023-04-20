@@ -24,46 +24,12 @@
 
     <%- include("layout/success-alert") %>
         <div class="section-wrapper">
-            <section>
-                <h1>উৎসব শেষে</h1>
-                <div class="content">
-                    <div class="image_container"><img src="./Image/kobita.jpg" alt="Kobita-Image"></div>
-                </div>
-                <div class="text_container">
-                    <p id="main-golpo" style="text-align: left;">
-                        আমি তোমাকে ডাকবো উৎসবের শেষে,
-                        <br /> পাহাড়ের দেশে, কিংবা বালুকাবেলায়।
-                        <br /> ভেঙেচুরে ক্ষান্ত হয়ে-
-                        <br /> ভিসুভিয়াসকে সাথে নিয়ে,
-                        <br /> সান আন্দ্রিয়াসের চেয়েও গভীর চির বুকে।
-                        <br />
-                        <br /> তুমি আমাকে ডেকো-
-                        <br /> আমার অপেক্ষাতেই থেকো,
-                        <br /> পড়ন্ত একা বিকেলে যখন-
-                        <br /> দুঃখগুলো সাথে নিয়ে পাখিরা উড়ে তা-,
-                        <br /> ভাঙ্গা হৃদয়ের স্রোত যখন
-                        <br /> ক্রিস্ত দ্যি রেডিমার-ও ডুবিয়ে ফেলে;
-                        <br /> আকাশের নীলিমা ছাপিয়ে যখন
-                        <br /> ভয় ভয় মেঘের ঘনঘটা;
-                        <br /> ঝড় আসবে খানিক পর,
-                        <br /> তবুও আমি আসবো-
-                        <br /> দক্ষিণা বাতাসের সাথে,
-                        <br /> তোমার মনে,
-                        <br /> উৎসব শেষে সবাই বাড়ি ফিরবে-
-                        <br /> প্রিয়,তুমি আমাকেই ডেকো,
-                        <br /> তখন আমার অপেক্ষাতেই থেকো।
-                        <h4> -অর্ক সমুজ্জ্বল </h4>
 
-                    </p>
-                </div>
-            </section>
 
-            <% userkobitas.forEach(kobita=>{ %>
-                <div class="story-devider ">
-                    <div class="devider-line "></div>
-                    <div class="devider-star "><i class="fa-solid fa-star-of-david "></i></div>
-                    <div class="devider-line "></div>
-                </div>
+            <% userApprovedStories.sort(function(a, b) { return new Date(b.post_time) - new Date(a.post_time); });
+                userApprovedStories.forEach(kobita=>{
+                if(kobita.story_type ==='kobita' ){ %>
+
                 <section>
                     <h1>
                         <%=kobita.story_title %>
@@ -73,7 +39,8 @@
                     </div>
                     <div class="text_container">
                         <p id="main-golpo" style="text-align: left;">
-                            <%=kobita.story %>
+                            <%= kobita.story.replace(/\n/g, '<br>' ) %>
+
                                 <h4>-
                                     <%=kobita.writter_name %>
                                 </h4>
@@ -83,7 +50,52 @@
                         </p>
                     </div>
                 </section>
-                <% }) %>
+
+                <div class="story-devider ">
+                    <div class="devider-line "></div>
+                    <div class="devider-star "><i class="fa-solid fa-star-of-david "></i></div>
+                    <div class="devider-line "></div>
+                </div>
+
+                <%}%>
+                    <% }) %>
+
+                        <section>
+                            <h1>উৎসব শেষে</h1>
+                            <div class="content">
+                                <div class="image_container"><img src="./Image/kobita.jpg" alt="Kobita-Image"></div>
+                            </div>
+                            <div class="text_container">
+                                <p id="main-golpo" style="text-align: left;">
+                                    আমি তোমাকে ডাকবো উৎসবের শেষে,
+                                    <br /> পাহাড়ের দেশে, কিংবা বালুকাবেলায়।
+                                    <br /> ভেঙেচুরে ক্ষান্ত হয়ে-
+                                    <br /> ভিসুভিয়াসকে সাথে নিয়ে,
+                                    <br /> সান আন্দ্রিয়াসের চেয়েও গভীর চির বুকে।
+                                    <br />
+                                    <br /> তুমি আমাকে ডেকো-
+                                    <br /> আমার অপেক্ষাতেই থেকো,
+                                    <br /> পড়ন্ত একা বিকেলে যখন-
+                                    <br /> দুঃখগুলো সাথে নিয়ে পাখিরা উড়ে তা-,
+                                    <br /> ভাঙ্গা হৃদয়ের স্রোত যখন
+                                    <br /> ক্রিস্ত দ্যি রেডিমার-ও ডুবিয়ে ফেলে;
+                                    <br /> আকাশের নীলিমা ছাপিয়ে যখন
+                                    <br /> ভয় ভয় মেঘের ঘনঘটা;
+                                    <br /> ঝড় আসবে খানিক পর,
+                                    <br /> তবুও আমি আসবো-
+                                    <br /> দক্ষিণা বাতাসের সাথে,
+                                    <br /> তোমার মনে,
+                                    <br /> উৎসব শেষে সবাই বাড়ি ফিরবে-
+                                    <br /> প্রিয়,তুমি আমাকেই ডেকো,
+                                    <br /> তখন আমার অপেক্ষাতেই থেকো।
+                                <h4> -অর্ক সমুজ্জ্বল </h4>
+                                <h5 style="margin: 3px 0px 0px 12px; color: gray; ">
+                                    7/15/2022, 6:12:10 PM
+                                </h5>
+
+                                </p>
+                            </div>
+                        </section>
         </div>
 
         <!-- Content Section is finished !  -->

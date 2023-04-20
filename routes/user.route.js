@@ -14,15 +14,13 @@ const {
     getUserStory,
     getLogout,
     postUserStory,
-    postUserKobita,
     getTechnology,
-    postUserTech,
     getApprovalPage,
-    postUserGolpo,
     deleteUserStory,
     getApprovalError,
     getGontobyoUsers,
     deleteUser,
+    postUserApprovedstory,
 } = require('../controllers/user.controller');
 const { loginValidator } = require('../validator/user.login.validator');
 const { registerValidator } = require('../validator/user.registar.validator');
@@ -33,9 +31,9 @@ const {
 } = require('../middleware/authentication.middleware');
 const { userStoryValidator } = require('../validator/user-story.validator');
 const upload = require('../utils/multer-upload.util');
-const { userKobitaValidator } = require('../validator/user.kobita.validator');
-const { userTechValidator } = require('../validator/user.tech.validator');
-const { userGolpoValidator } = require('../validator/user.golpo.validator');
+const {
+    userApproveStoryValidator,
+} = require('../validator/user.storyApprove.validator');
 
 // Get Routes
 router.get('/', getIndex);
@@ -69,28 +67,14 @@ router.post(
     '/userstory',
     upload.single('storyimage'),
     userStoryValidator,
-    postUserStory,
+    postUserStory
 );
 
 router.post(
     '/usergolpo',
     upload.single('storyimage'),
-    userGolpoValidator,
-    postUserGolpo,
-);
-
-router.post(
-    '/userkobita',
-    upload.single('storyimage'),
-    userKobitaValidator,
-    postUserKobita,
-);
-
-router.post(
-    '/usertech',
-    upload.single('storyimage'),
-    userTechValidator,
-    postUserTech,
+    userApproveStoryValidator,
+    postUserApprovedstory
 );
 
 // Delete Routes

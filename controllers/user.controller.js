@@ -2,35 +2,63 @@
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const { validationResult } = require('express-validator');
+require('dotenv').config();
+const nodeMailer = require('nodemailer');
 
 // Internal Inputs
 const userInfo = require('../models/user.register.model');
 const userStoryInfo = require('../models/user.post-story.model');
-const userGolpoInfo = require('../models/user.golpo.model');
-const userKobitaInfo = require('../models/user.kobita.model');
-const userTechInfo = require('../models/user.tech.model');
+const userApprovedStoryInfo = require('../models/user.approved-story.model');
 const errorFormetter = require('../utils/validation-error-formatter.utils');
 
+// Node Mailer Configuration Step
+
+let nodeMailerEmail = process.env.NodeMailer_EMAIL;
+let nodeMailerEmailPass = process.env.NodeMailerEMAIL_PASS;
+let nodeMailerConfig = {
+    service: 'gmail',
+    port: 465,
+    secure: true,
+    auth: {
+        user: nodeMailerEmail,
+        pass: nodeMailerEmailPass,
+    },
+};
+
+const transporter = nodeMailer.createTransport(nodeMailerConfig);
 // Get Controllers
 exports.getIndex = (req, res) => {
-    res.render('index', {});
+    userApprovedStoryInfo.find({}, (error, userApprovedStories) => {
+        res.render('index', {
+            userApprovedStories,
+        });
+    });
 };
 
 exports.getGolpo = (req, res) => {
-    userGolpoInfo.find({}, (error, usergolpos) => {
-        res.render('golpo', { usergolpos, messages: req.flash('success') });
+    userApprovedStoryInfo.find({}, (error, userApprovedStories) => {
+        res.render('golpo', {
+            userApprovedStories,
+            messages: req.flash('success'),
+        });
     });
 };
 
 exports.getTechnology = (req, res) => {
-    userTechInfo.find({}, (error, userteches) => {
-        res.render('technology', { userteches, messages: req.flash('success') });
+    userApprovedStoryInfo.find({}, (error, userApprovedStories) => {
+        res.render('technology', {
+            userApprovedStories,
+            messages: req.flash('success'),
+        });
     });
 };
 
 exports.getKobita = (req, res) => {
-    userKobitaInfo.find({}, (error, userkobitas) => {
-        res.render('kobita', { userkobitas, messages: req.flash('success') });
+    userApprovedStoryInfo.find({}, (error, userApprovedStories) => {
+        res.render('kobita', {
+            userApprovedStories,
+            messages: req.flash('success'),
+        });
     });
 };
 
@@ -39,7 +67,11 @@ exports.getRegister = (req, res) => {
 };
 
 exports.getLogin = (req, res) => {
-    res.render('login', { error: {}, value: {}, messages: req.flash('success') });
+    res.render('login', {
+        error: {},
+        value: {},
+        messages: req.flash('success'),
+    });
 };
 
 exports.getUserStory = (req, res) => {
@@ -86,13 +118,7 @@ exports.getLogout = (req, res, next) => {
 // Post Controllers
 
 exports.postRegister = (req, res) => {
-    const {
-        username,
-        email,
-        phone,
-        password,
-        agreement,
-    } = req.body;
+    const { username, email, phone, password, agreement } = req.body;
 
     const errors = validationResult(req).formatWith(errorFormetter);
 
@@ -110,7 +136,7 @@ exports.postRegister = (req, res) => {
     }
 
     try {
-        bcrypt.hash(password, saltRounds, async(err, hash) => {
+        bcrypt.hash(password, saltRounds, async (err, hash) => {
             const registerInfo = new userInfo({
                 username,
                 email,
@@ -120,7 +146,20 @@ exports.postRegister = (req, res) => {
             });
             registerInfo
                 .save()
-                .then(() => {
+                .then(async () => {
+                    // Creating Mail information
+                    let mailInfo = {
+                        from: '"Gontobyo" <sadia@gmail.com>',
+                        to: 'sahreyararafat@gmail.com',
+                        subject: `New Account Created!`,
+                        html: `<p>Created a new account on Gontobyo as <b>" ${username} "</b> using <h3>Email: ${email}</h3><h3>Phone Number: ${phone}</h3></p> `,
+                    };
+
+                    // Sending Mail via Nodemailer
+                    const info = await transporter.sendMail(mailInfo);
+
+                    // console.log('Message sent: %s', info.messageId);
+
                     req.flash('success', 'Successfully registered!');
                     res.redirect('/login');
                 })
@@ -133,7 +172,7 @@ exports.postRegister = (req, res) => {
     }
 };
 
-exports.postLogin = async(req, res, next) => {
+exports.postLogin = async (req, res, next) => {
     const { email, password } = req.body;
 
     const errors = validationResult(req).formatWith(errorFormetter);
@@ -196,7 +235,7 @@ exports.postLogin = async(req, res, next) => {
 };
 
 exports.postUserStory = (req, res) => {
-    const { writing_type } = req.body;
+    const { story_type } = req.body;
     const { writter_name } = req.body;
     const { story_title } = req.body;
     const { story } = req.body;
@@ -207,7 +246,7 @@ exports.postUserStory = (req, res) => {
         return res.render('userstory', {
             error: errors.mapped(),
             value: {
-                writing_type,
+                story_type,
                 writter_name,
                 story_title,
                 story,
@@ -217,7 +256,7 @@ exports.postUserStory = (req, res) => {
     }
 
     const UserStoryInfo = new userStoryInfo({
-        writing_type,
+        story_type,
         writter_name,
         story_title,
         story,
@@ -227,19 +266,42 @@ exports.postUserStory = (req, res) => {
         UserStoryInfo.storyimage = req.file.path;
     }
     UserStoryInfo.save()
-        .then(() => {
+        .then(async () => {
+            // Creating Mail information
+            let mailInfo = {
+                from: '"Gontobyo" <sadia@gmail.com>',
+                to: 'sahreyararafat@gmail.com',
+                subject: `New Story Posted!`,
+                html: `<p>New story posted to Gontobyo by <b>" ${posted_by} "</b> and awaiting approval. <h3>Story Type: ${story_type}</h3><h3>Writter Name: ${writter_name}</h3><h3>Story Title: ${story_title}</h3></p> `,
+            };
+
+            // Sending Mail via Nodemailer
+            const info = await transporter.sendMail(mailInfo);
+
+            // console.log('Message sent: %s', info.messageId);
+
             req.flash(
                 'success',
-                'Posted successfully! Your story is waiting for approval.',
+                'Posted successfully! Your story is waiting for approval.'
             );
-            res.redirect('/golpo');
+
+            if (story_type === 'golpo') {
+                res.redirect('/golpo');
+            } else if (story_type === 'tech') {
+                res.redirect('/technology');
+            } else if (story_type === 'kobita') {
+                res.redirect('/kobita');
+            } else {
+                res.redirect('/');
+            }
         })
         .catch((error) => {
             console.log(error);
         });
 };
 
-exports.postUserGolpo = (req, res) => {
+exports.postUserApprovedstory = (req, res) => {
+    const { story_type } = req.body;
     const { writter_name } = req.body;
     const { story_title } = req.body;
     const { story } = req.body;
@@ -253,88 +315,28 @@ exports.postUserGolpo = (req, res) => {
         });
     }
 
-    const golpoInfo = new userGolpoInfo({
+    const approvedStoryInfo = new userApprovedStoryInfo({
+        story_type,
         writter_name,
         story_title,
         story,
         post_time,
         storyimage,
     });
-    golpoInfo
+    approvedStoryInfo
         .save()
         .then(() => {
             req.flash('success', 'Successfully approved!');
-            res.redirect('/golpo');
-        })
-        .catch((error) => {
-            console.log(error);
-        });
-};
 
-exports.postUserKobita = (req, res) => {
-    const { writter_name } = req.body;
-    const { story_title } = req.body;
-    const { story } = req.body;
-    const { storyimage } = req.body;
-    const { post_time } = req.body;
-
-    const errors = validationResult(req).formatWith(errorFormetter);
-    if (!errors.isEmpty()) {
-        return res.render('approval-error', {
-            error: errors.mapped(),
-        });
-    }
-
-    const kobitaInfo = new userKobitaInfo({
-        writter_name,
-        story_title,
-        story,
-        storyimage,
-        post_time,
-    });
-    if (req.file) {
-        kobitaInfo.storyimage = req.file.path;
-    }
-    kobitaInfo
-        .save()
-        .then(() => {
-            req.flash('success', 'Successfully approved!');
-            res.redirect('/kobita');
-        })
-        .catch((error) => {
-            console.log(error);
-        });
-};
-
-exports.postUserTech = (req, res) => {
-    const { writter_name } = req.body;
-    const { story_title } = req.body;
-    const { story } = req.body;
-    const { storyimage } = req.body;
-    const { post_time } = req.body;
-
-    const errors = validationResult(req).formatWith(errorFormetter);
-    if (!errors.isEmpty()) {
-        return res.render('approval-error', {
-            error: errors.mapped(),
-        });
-    }
-
-    const techInfo = new userTechInfo({
-        writter_name,
-        story_title,
-        story,
-        storyimage,
-        post_time,
-    });
-    if (req.file) {
-        techInfo.storyimage = req.file.path;
-    }
-    techInfo
-        .save()
-        .then(() => {
-            req.flash('success', 'Successfully approved!');
-            res.redirect('/technology');
+            if (story_type === 'golpo') {
+                res.redirect('/golpo');
+            } else if (story_type === 'tech') {
+                res.redirect('/technology');
+            } else if (story_type === 'kobita') {
+                res.redirect('/kobita');
+            } else {
+                res.redirect('/');
+            }
         })
         .catch((error) => {
             console.log(error);
@@ -343,7 +345,7 @@ exports.postUserTech = (req, res) => {
 
 // Delete Controllers
 
-exports.deleteUserStory = async(req, res) => {
+exports.deleteUserStory = async (req, res) => {
     const { golpo_id } = req.body;
     const golpo = await userStoryInfo.findOne({ _id: golpo_id });
     const golpo_title = golpo.story_title;
@@ -356,13 +358,16 @@ exports.deleteUserStory = async(req, res) => {
     }
 };
 
-exports.deleteUser = async(req, res) => {
+exports.deleteUser = async (req, res) => {
     const { user_id } = req.body;
     const user = await userInfo.findOne({ _id: user_id });
     const userName = user.username;
     try {
         await userInfo.deleteOne({ _id: user_id });
-        req.flash('success', `User '${userName}' has been deleted successfully!`);
+        req.flash(
+            'success',
+            `User '${userName}' has been deleted successfully!`
+        );
         res.redirect('/gontobyo-users');
     } catch (error) {
         console.log(error);

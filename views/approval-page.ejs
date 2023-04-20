@@ -25,7 +25,7 @@
 
     <%- include("layout/success-alert") %>
 
-        <% if(userstories ==""){%>
+        <% if(userstories.length===0 ){%>
             <div class="approval-error-container">
                 <div class="robotImage-and-text-container">
                     <div class="robot-image-container">
@@ -38,82 +38,100 @@
                 </div>
             </div>
             <%}else{%>
-                <% userstories.forEach(story=>{ %>
+                <% userstories.sort(function(a, b) { return new Date(b.Posted_at) - new Date(a.Posted_at); });
+                    userstories.forEach(story=>{ %>
                     <% if(story.storyimage){ %>
-                        <% var storyImage = story.storyimage %>
-                            <% storyImage = storyImage.replace('public','') %>
+                        <% var storyImage=story.storyimage %>
+                            <% storyImage=storyImage.replace('public','') %>
                                 <%}else{%>
-                                    <% storyImage = 'https://source.unsplash.com/random/500%C3%97500/?natural-place' %>
-                                        <%}%>
+                                    <% let image_serial=Math.floor(Math.random() * 16) + 1; %>
+                                        <% storyImage=`./Image/story-image (${image_serial}).jpg` %>
 
-                                            <section>
-                                                <h5 style="margin: 50px 0px 0px; color: gray;">
-                                                    <span style="color: black; font-weight: bold;">Category:</span>
-                                                    <%= story.writing_type %>
-                                                </h5>
-                                                <h1 style="margin: 30px 0px 50px;">
-                                                    <%= story.story_title %>
-                                                </h1>
-                                                <div class="content ">
-                                                    <div class="image_container"><img src="<%=storyImage %>" alt="Story-Image"></div>
-                                                    <div class="text_container">
-                                                        <p id="main-golpo">
-                                                            <%= story.story %>
-                                                                <h4>-
-                                                                    <%= story.writter_name %>
-                                                                </h4>
-                                                                <h5 style="margin: 3px 0px 0px 12px; color: gray; ">
-                                                                    <span style="color: black; font-weight: bold;"> Posted by:</span>
-                                                                    <%= story.posted_by %>
-                                                                </h5>
-                                                                <h5 style="margin: 3px 0px 0px 12px; color: gray; ">
-                                                                    <span style="color: black; font-weight: bold;">  Posted at:</span>
-                                                                    <%= story.Posted_at %>
-                                                                </h5>
-                                                        </p>
+                                            <%}%>
+                                                <section>
+                                                    <h5 style="margin: 50px 0px 0px; color: gray;">
+                                                        <span style="color: black; font-weight: bold;">Category:</span>
+                                                        <%= story.story_type %>
+                                                    </h5>
+                                                    <h1 style="margin: 30px 0px 50px;">
+                                                        <%= story.story_title %>
+                                                    </h1>
+                                                    <div class="content ">
+                                                        <div class="image_container"><img src="<%=storyImage %>"
+                                                                alt="Story-Image"></div>
+                                                        <div class="text_container">
+                                                            <p id="main-golpo">
+                                                                <%= story.story %>
+                                                                    <h4>-
+                                                                        <%= story.writter_name %>
+                                                                    </h4>
+                                                                    <h5 style="margin: 3px 0px 0px 12px; color: gray; ">
+                                                                        <span style="color: black; font-weight: bold;">
+                                                                            Posted by:</span>
+                                                                        <%= story.posted_by %>
+                                                                    </h5>
+                                                                    <h5 style="margin: 3px 0px 0px 12px; color: gray; ">
+                                                                        <span style="color: black; font-weight: bold;">
+                                                                            Posted at:</span>
+                                                                        <%= story.Posted_at %>
+                                                                    </h5>
+                                                            </p>
+                                                        </div>
                                                     </div>
-                                                </div>
-
-                                                <div class="Approve-Delete-container">
-                                                    <form class="golpo-form" action="/user<%=story.writing_type%>" method="post" enctype="multipart/form-data">
-
-                                                        <input class="d-none" type="text" name="writter_name" value="<%= story.writter_name %>" />
-
-                                                        <input class="d-none" type="text" name="story_title" value="<%= story.story_title %>" />
-
-                                                        <input class="d-none" type="text" name="storyimage" value="<%= storyImage %>" />
-
-                                                        <input class="d-none" type="text" name="post_time" value="<%= story.Posted_at %>" />
-
-                                                        <input class="d-none" type="text" name="story" value="<%= story.story %>" />
-
-                                                        <button id="approve-btn" class="approve-btn" type="submit">Approve</button>
-
-                                                    </form>
 
 
-                                                    <form action="/delete-golpo" method="post">
 
-                                                        <input class="d-none" name="golpo_id" value="<%= story._id %>" />
+                                                    <div class="Approve-Delete-container">
+                                                        <form class="golpo-form" action="/usergolpo" method="post"
+                                                            enctype="multipart/form-data">
 
-                                                        <button class="delete-btn" type="submit">Delete</button>
+                                                            <input class="d-none" type="text" name="story_type"
+                                                                value="<%= story.story_type %>" />
 
-                                                    </form>
+                                                            <input class="d-none" type="text" name="writter_name"
+                                                                value="<%= story.writter_name %>" />
 
-                                                </div>
+                                                            <input class="d-none" type="text" name="story_title"
+                                                                value="<%= story.story_title %>" />
 
-                                            </section>
-                                            <% }) %>
+                                                            <input class="d-none" type="text" name="storyimage"
+                                                                value="<%= storyImage %>" />
 
-                                                <%}%>
+                                                            <input class="d-none" type="text" name="post_time"
+                                                                value="<%= story.Posted_at %>" />
 
-                                                    <!-- Content Section is finished !  -->
+                                                            <input class="d-none" type="text" name="story"
+                                                                value="<%= story.story %>" />
 
-                                                    <%- include("layout/footer") %>
+                                                            <button id="approve-btn" class="approve-btn"
+                                                                type="submit">Approve</button>
 
-                                                        <script src="./Js/main.js"></script>
+                                                        </form>
 
 
-                                                        </body>
+                                                        <form action="/delete-golpo" method="post">
+
+                                                            <input class="d-none" name="golpo_id"
+                                                                value="<%= story._id %>" />
+
+                                                            <button class="delete-btn" type="submit">Delete</button>
+
+                                                        </form>
+
+                                                    </div>
+
+                                                </section>
+                                                <% }) %>
+
+                                                    <%}%>
+
+                                                        <!-- Content Section is finished !  -->
+
+                                                        <%- include("layout/footer") %>
+
+                                                            <script src="./Js/main.js"></script>
+
+
+                                                            </body>
 
 </html>

@@ -1,7 +1,11 @@
 const mongoose = require('mongoose');
 const date = new Date();
 
-const usergolpoSchema = new mongoose.Schema({
+const userApprovedStorySchema = new mongoose.Schema({
+    story_type: {
+        type: String,
+        required: true,
+    },
     writter_name: {
         type: String,
         required: true,
@@ -29,4 +33,4 @@ const usergolpoSchema = new mongoose.Schema({
     },
 });
 
-module.exports = mongoose.model('UserGolpo', usergolpoSchema);
+module.exports = mongoose.model('userApprovedStory', userApprovedStorySchema);

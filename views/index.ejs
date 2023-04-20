@@ -24,85 +24,183 @@
     <div class="section-wrapper">
         <section>
             <h1 class="first-number">প্রথম সংখ্যা</h1>
-            <div class="content-1">
-                <div class="image-content"> <img src="./Image/ghost.jpg" alt="Content-1 Image"></div>
-                <a href="/golpo">
-                    <div class="text-content">
-                        <div class="story">
-                            <div class="storyTitle-and-postTime">
-                                <h4>ভূতের গল্প</h4>
-                                <h4>3 days ago</h4>
+
+            <% userApprovedStories.sort(function(a, b) { return new Date(b.post_time) - new Date(a.post_time); });
+                userApprovedStories.forEach(story=>{ %>
+
+                <div class="content-1">
+                    <div class="image-content"> <img src="<%= story.storyimage %>" alt="dynamic-content Image">
+                    </div>
+                    <a href="/<%=story.story_type%>">
+                        <div class="text-content">
+                            <div class="story-header">
+                                <div class="storyTitle-and-postTime">
+                                    <h4>
+                                        <%= story.story_type%>
+                                    </h4>
+
+                                    <% const postDate=new Date(story.post_time); const currentDate=new Date(); const
+                                        timeDiff=Math.floor((currentDate - postDate) / (1000 * 60 * 60 * 24)); %>
+                                        <h4>
+                                            <%= timeDiff %> days ago
+                                        </h4>
+
+                                </div>
+                                <h1>
+                                    <%= story.story_title %>
+                                </h1>
                             </div>
-                            <h1>উইনিপেগের ভূতেরা-১</h1>
-                            <p>টিয়ার বিল্ডিং দিয়ে টানেলে ঢুকতে চেষ্টা করলাম। দরজা লক করা। অগত্যা বাইরে দিয়েই যেতে হবে লাইব্রেরিতে। কাছেই এলিজাবেৎ ডিফয় লাইব্রেরি। লাইব্রেরির পেছনের দরজা কাছে হওয়ায় সেদিকেই গেলাম......</p>
+                            <div class="story">
+                                <p>
+                                    <%= story.story %>
+                                </p>
+                            </div>
+                            <div class="authorProfile-and-readMoreLink">
+                                <div class="author-profile">
+                                    <% let profile_serial=Math.floor(Math.random() * 12) + 1; %>
+                                        <div class="author-image"><img src="./Image/profile (<%= profile_serial %>).png"
+                                                alt="Author Image">
+                                        </div>
+                                        <div class="author-name">
+                                            <h4>
+                                                <%= story.writter_name %>
+                                            </h4>
+                                        </div>
+                                </div>
+                                <h4 class="read-more-link">Read More <i class="fa-solid fa-arrow-right"></i>
+                                </h4>
+                            </div>
                         </div>
-                        <div class="authorProfile-and-readMoreLink">
-                            <div class="author-profile">
-                                <div class="author-image"><img src="./Image/Arko.png" alt="Author Image"></div>
-                                <div class="author-name">
-                                    <h4>অর্ক সমুজ্জ্বল দত্ত</h4>
+                    </a>
+                </div>
+
+                <% }) %>
+
+                    <div class="content-1">
+                        <div class="image-content"> <img src="./Image/ghost.jpg" alt="Content-1 Image"></div>
+                        <a href="/golpo">
+                            <div class="text-content">
+                                <div class="story-header">
+                                    <div class="storyTitle-and-postTime">
+                                        <h4>গল্প</h4>
+                                        <h4>3 days ago</h4>
+                                    </div>
+                                    <h1>উইনিপেগের ভূতেরা-১</h1>
+                                </div>
+                                <div class="story">
+                                    <p>বিবর্ণ তূষারের মধ্যে একদমই বের হতে ইচ্ছে করে না। এমনকি ঘরের বাইরে জানালা দিয়ে
+                                        তাকালেও
+                                        চারিদিকে শুধু নৈরাশ্য, আলস্য, জড়তা ছেয়ে থাকে। আমার এমন ঘরকুনো স্বভাব কখনোই ছিল
+                                        না। সবসময়
+                                        বন্ধু-বান্ধব সবার সাথে মিলেমিশে আড্ডা দিয়েই সময় পার করেছি। ঠিক করলাম, ইদানিং-এর
+                                        এই
+                                        ঘরকুনো ভাব অভ্যাসে পরিনত হওয়ার আগেই বাদ দিতে হবে। ইচ্ছে করছে আড্ডা দিতে। চলে
+                                        গেলাম বন্ধু
+                                        কুদ্দুসের বাসায়। পড়াশুনা, টিভি দেখা, চাকরি; এভাবেই দিন চলে যাওয়ায় আড্ডা দেয়ার
+                                        মতো কোন
+                                        মজাদার টপিক আসছিলো নাহ। খানিকক্ষণ এটা ওটা নিয়ে কথা বলতে বলতে চা বানিয়ে ফেললাম।
+                                        কানাডায়
+                                        চা বানানো হলো সবচেয়ে সহজ। পানি ঢালো, চাপাতি দাও, হাফ স্কিমড দুধ; এরপর
+                                        মাইক্রোওভেনে দিয়ে
+                                        দিলেই হলো। দু’মিনিটে পার্ফেক্ট চা। যদিও শুরু করেছিলাম তাজমহল চা দিয়ে, কিন্তু
+                                        ইদানিং রেড
+                                        লেবেলের চা-টাই বেশি ভাল লাগছে।</p>
+                                </div>
+                                <div class="authorProfile-and-readMoreLink">
+                                    <div class="author-profile">
+                                        <div class="author-image"><img src="./Image/Arko.png" alt="Author Image"></div>
+                                        <div class="author-name">
+                                            <h4>অর্ক সমুজ্জ্বল দত্ত</h4>
+                                        </div>
+                                    </div>
+                                    <h4 class="read-more-link">Read More <i class="fa-solid fa-arrow-right"></i></h4>
                                 </div>
                             </div>
-                            <h4 class="read-more-link">Read More <i class="fa-solid fa-arrow-right"></i></h4>
-                        </div>
+                        </a>
                     </div>
-                </a>
-            </div>
 
 
-            <div class="content-2">
-                <div class="image-content"> <img src="./Image/neuralink.jpeg" alt="Content-2 Image"></div>
-                <a href="/technology">
-                    <div class="text-content">
-                        <div class="story">
-                            <div class="storyTitle-and-postTime">
-                                <h4>প্রযুক্তি</h4>
-                                <h4>1 week ago</h4>
-                            </div>
-                            <h1>নিউরালিংক</h1>
-                            <p>যদিও এই ডিভাইসটির প্রাথমিক উদ্দেশ্য হলো পক্ষাঘাতগ্রস্থ রুগীদের স্বাভাবিক কর্মক্ষম করে তোলা। তবে মানুষের প্রতিনয়ত উচ্চাভিলাষ আর প্রযুক্তির উৎকর্ষতা; নির্দ্বিধায় বলা যায়, নিউরালিংক হতে পারে অগমেন্টেড হিউম্যান বা অতিমানবের প্রথম
-                                ধাপ।.....
-                            </p>
-                        </div>
-                        <div class="authorProfile-and-readMoreLink">
-                            <div class="author-profile">
-                                <div class="author-image"><img src="./Image/Abesh.png" alt="Author Image"></div>
-                                <div class="author-name">
-                                    <h4>এহসান হক</h4>
+                    <div class="content-2">
+                        <div class="image-content"> <img src="./Image/neuralink.jpeg" alt="Content-2 Image"></div>
+                        <a href="/technology">
+                            <div class="text-content">
+                                <div class="story-header">
+                                    <div class="storyTitle-and-postTime">
+                                        <h4>প্রযুক্তি</h4>
+                                        <h4>1 week ago</h4>
+                                    </div>
+                                    <h1>নিউরালিংক</h1>
+                                </div>
+                                <div class="story">
+                                    <p>যতো দিন যাচ্ছে মানুষের মৌলিক চাহিদা গুলোও পরিবর্তন হচ্ছে। পাচঁটির সাথে যোগ হচ্ছে
+                                        আরো একটি
+                                        চাহিদা, প্রযুক্তি। মৌলিক চাহিদাগুলো যেমন আমাদের জীবনের অপরিহার্য অংশ, তেমনি এই
+                                        প্রযুক্তিকেও জীবনের অপরিহার্য অঙ্গতে পরিনত করতে রীতিমতো প্রতিযোগিতায় নেমেছে
+                                        প্রযুক্তি
+                                        বিশ্বের সেরা কোম্পানিগুলো। তাদের মধ্যে অন্যতম হলো ইলন মাস্কের নিউরালিংক।
+                                        নিউরালিংক হলো এমন এক ডিভাইস/চিপ যেটা ব্রেইনে যুক্ত করলে বিভিন্ন জটিল সমস্যা
+                                        মানুষ সমাধান
+                                        করে ফেলতে পারবে কোন বাস্তবিক অভিজ্ঞতা/অর্জিত জ্ঞান ছাড়াই। ধরা যাক, জটিল কোন
+                                        সার্জারির
+                                        কথা। একজন চিকিৎসকের দীর্ঘদিন সার্জারি করে অভিজ্ঞতা অর্জন করতে হয় সেই জটিল
+                                        সার্জারিতে সফল
+                                        হতে। কিন্তু নিউরালিংক যুক্ত করার সাথে সাথে হয়তো যেকোন মানুষ নিমিষেই করে ফেলবে
+                                        সেই জটিল
+                                        সার্জারি।
+                                    </p>
+                                </div>
+                                <div class="authorProfile-and-readMoreLink">
+                                    <div class="author-profile">
+                                        <div class="author-image"><img src="./Image/Abesh.png" alt="Author Image"></div>
+                                        <div class="author-name">
+                                            <h4>এহসান হক</h4>
+                                        </div>
+                                    </div>
+                                    <h4 class="read-more-link">Read More <i class="fa-solid fa-arrow-right"></i></h4>
                                 </div>
                             </div>
-                            <h4 class="read-more-link">Read More <i class="fa-solid fa-arrow-right"></i></h4>
-                        </div>
+                        </a>
                     </div>
-                </a>
-            </div>
 
 
-            <div class="content-3">
-                <div class="image-content"> <img src="./Image/kobita.jpg" alt="Content-3 Image"></div>
-                <a href="/kobita" style="width: 100%;">
-                    <div class="text-content">
-                        <div class="story">
-                            <div class="storyTitle-and-postTime">
-                                <h4>কবিতা</h4>
-                                <h4>2 weeks ago</h4>
-                            </div>
-                            <h1>উৎসব শেষে</h1>
-                            <p>উৎসব শেষে সবাই বাড়ি ফিরবে- <br> প্রিয়,তুমি আমাকেই ডেকো, <br> তখন আমার অপেক্ষাতেই থেকো।
-                            </p>
-                        </div>
-                        <div class="authorProfile-and-readMoreLink">
-                            <div class="author-profile">
-                                <div class="author-image"><img src="./Image/Arko.png" alt="Author Image"></div>
-                                <div class="author-name">
-                                    <h4>অর্ক সমুজ্জ্বল দত্ত</h4>
+                    <div class="content-3">
+                        <div class="image-content"> <img src="./Image/kobita.jpg" alt="Content-3 Image"></div>
+                        <a href="/kobita" style="width: 100%;">
+                            <div class="text-content">
+                                <div class="story-header">
+                                    <div class="storyTitle-and-postTime">
+                                        <h4>কবিতা</h4>
+                                        <h4>2 weeks ago</h4>
+                                    </div>
+                                    <h1>উৎসব শেষে</h1>
+                                </div>
+                                <div class="story">
+                                    <p>আমি তোমাকে ডাকবো উৎসবের শেষে, <br>
+                                        পাহাড়ের দেশে, কিংবা বালুকাবেলায়। <br>
+                                        ভেঙেচুরে ক্ষান্ত হয়ে- <br>
+                                        ভিসুভিয়াসকে সাথে নিয়ে, <br>
+                                        সান আন্দ্রিয়াসের চেয়েও গভীর চির বুকে। <br>
+                                        তুমি আমাকে ডেকো- <br>
+                                        আমার অপেক্ষাতেই থেকো, <br>
+                                        পড়ন্ত একা বিকেলে যখন- <br>
+                                        দুঃখগুলো সাথে নিয়ে পাখিরা উড়ে তা- <br>,
+                                        ভাঙ্গা হৃদয়ের স্রোত যখন <br>
+                                        ক্রিস্ত দ্যি রেডিমার-ও ডুবিয়ে ফেলে; <br>
+                                        আকাশের নীলিমা ছাপিয়ে যখন <br>
+                                    </p>
+                                </div>
+                                <div class="authorProfile-and-readMoreLink">
+                                    <div class="author-profile">
+                                        <div class="author-image"><img src="./Image/Arko.png" alt="Author Image"></div>
+                                        <div class="author-name">
+                                            <h4>অর্ক সমুজ্জ্বল দত্ত</h4>
+                                        </div>
+                                    </div>
+                                    <h4 class="read-more-link">Read More <i class="fa-solid fa-arrow-right"></i></h4>
                                 </div>
                             </div>
-                            <h4 class="read-more-link">Read More <i class="fa-solid fa-arrow-right"></i></h4>
-                        </div>
+                        </a>
                     </div>
-                </a>
-            </div>
 
         </section>
     </div>

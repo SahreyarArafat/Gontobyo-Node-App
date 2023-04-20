@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const date = new Date();
 
 const postStorySchema = new mongoose.Schema({
-    writing_type: {
+    story_type: {
         type: String,
         required: true,
     },

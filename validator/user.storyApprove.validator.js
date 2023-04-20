@@ -1,11 +1,11 @@
 // External Inputs
 const { body } = require('express-validator');
 
-const userGolpoInfo = require('../models/user.golpo.model');
+const userApprovedStoryInfo = require('../models/user.approved-story.model');
 
-exports.userGolpoValidator = [
-    body('story').custom(async(story, { req }) => {
-        const golpo = await userGolpoInfo.findOne({ story });
+exports.userApproveStoryValidator = [
+    body('story').custom(async (story, { req }) => {
+        const golpo = await userApprovedStoryInfo.findOne({ story });
 
         if (
             golpo &&
@@ -15,7 +15,7 @@ exports.userGolpoValidator = [
             const approvedTime = golpo.Approved_time;
 
             return Promise.reject(
-                `This golpo was already approved at ${approvedTime}! You may delete this.`,
+                `This golpo was already approved at ${approvedTime}! You may delete this.`
             );
         }
         if (
@@ -24,7 +24,7 @@ exports.userGolpoValidator = [
             golpo.writter_name !== req.body.writter_name
         ) {
             return Promise.reject(
-                'This golpo already exists on your site! You should not approve this.',
+                'This golpo already exists on your site! You should not approve this.'
             );
         }
     }),
